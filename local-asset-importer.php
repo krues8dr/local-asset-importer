@@ -56,16 +56,23 @@ function lai_handle_assets() {
   $url = 'assets.sunlightfoundation.com';
 
   $results = $wpdb->get_results($search_query, OBJECT );
+
+  $seen = array();
   foreach($results as $result) {
     print "Updating $result->ID<ul>";
 
     $content = $result->post_content;
 
     preg_match_all('/(?P<attr>src|href)=([\'"])(?P<url>https?:\/\/'. $url .'\/(.*?))\2/', $result->post_content, $matches, PREG_SET_ORDER);
-    foreach($matches as $match) {
-      $new_filename = lai_store_file($match['url'], $result->ID);
 
-      print "<li>Copied {$match['url']} -> $new_filename</li>";
+    foreach($matches as $match) {
+
+      if(!in_array($match['url'], $seen)) {
+        $new_filename = lai_store_file($match['url'], $result->ID);
+
+        print "<li>Copied {$match['url']} -> $new_filename</li>";
+        $seen[] = $match['url'];
+      }
 
       $content = lai_fix_content($match, $new_filename, $content);
     }
