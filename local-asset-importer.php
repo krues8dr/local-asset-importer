@@ -46,7 +46,8 @@ function lai_handle_assets() {
 
   global $wpdb;
 
-  $search_query = "SELECT ID, post_content FROM $wpdb->posts WHERE post_content LIKE '%{$url}%' ";
+  $search_query = "SELECT ID, post_content FROM $wpdb->posts WHERE post_content ";
+  $search_query .= "REGEXP '(src|href)=[\\'\"]https?://{$url}/[^\\'\"]+[\\'\"]' ";
   if($status) {
     $search_query .= " AND post_status='$status' ";
   }
