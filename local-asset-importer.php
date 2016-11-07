@@ -179,10 +179,10 @@ function lai_show_form() {
   }
 
   echo '<form method="GET" class="lai-form">
-    <p>
-      Your URL should not include http:// or https:// – just the base url.
-    </p>
     <div class="lai-form-row">
+      <p>
+        Your URL should not include http:// or https:// – just the base url.
+      </p>
       <label for="url">URL</label>
       <input type="text" name="url" id="url" value="' . $url . '" placeholder="assets.example.com">
     </div>' .
@@ -193,6 +193,9 @@ function lai_show_form() {
     // </div>' .
 
     '<div class="lai-form-row">
+      <p>
+        The number of entries to process at a time.  Since the search is slow, keep this number low to avoid page timeouts.
+      </p>
       <label for="limit">Number of Entries</label>
       <input type="text" name="limit" id="limit" value="' . $limit . '">
     </div>
