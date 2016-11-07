@@ -179,10 +179,12 @@ function lai_show_form() {
   }
 
   echo '<form method="GET" class="lai-form">
-
+    <p>
+      Your URL should not include http:// or https:// – just the base url.
+    </p>
     <div class="lai-form-row">
       <label for="url">URL</label>
-      <input type="text" name="url" id="url" value="' . $url . '">
+      <input type="text" name="url" id="url" value="' . $url . '" placeholder="assets.example.com">
     </div>' .
 
     // '<div class="lai-form-row">
